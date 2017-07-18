@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "manakin": "0.4",
-    "pg": "^6.4.1",
+    "pg": "^7.0.0",
     "pg-minify": "0.4",
     "spex": "1.2"
   },

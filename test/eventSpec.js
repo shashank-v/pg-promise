@@ -265,7 +265,7 @@ describe('Error event', function () {
         });
         it('must fail correctly', function () {
             expect(error instanceof TypeError).toBe(true);
-            expect(error.message).toBe('Empty or undefined query.');
+            expect(error.message).toBe('Invalid query format.');
             expect(context.params).toBeUndefined();
             if (!options.pgNative) {
                 expect(context.client instanceof pgClient).toBe(true);
@@ -682,7 +682,7 @@ describe('pgFormatting', function () {
                 expect(err.length).toBe(4);
                 for (let i = 0; i < 4; i++) {
                     expect(err[i] instanceof TypeError).toBe(true);
-                    expect(err[i].message).toBe('Empty or undefined query.');
+                    expect(err[i].message).toBe('Invalid query format.');
                 }
             }
         });
