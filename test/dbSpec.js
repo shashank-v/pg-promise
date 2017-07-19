@@ -22,7 +22,8 @@ const $errors = {
     invalidQuery: 'Invalid query format.',
     notEmpty: 'No return data was expected.',
     noData: 'No data returned from the query.',
-    multiple: 'Multiple rows were not expected.'
+    multiRow: 'Multiple rows were not expected.',
+    multiResult: 'Multiple results were not expected.'
 };
 
 describe('Database Instantiation', function () {
@@ -637,7 +638,7 @@ describe('Method \'none\'', function () {
             expect(result).toBeUndefined();
             expect(error instanceof pgp.errors.QueryResultError).toBe(true);
             expect(error.toString(1) != error.inspect()).toBe(true);
-            expect(error.message).toBe($errors.notEmpty);
+            expect(error.message).toBe($errors.multiRow);
         });
     });
 
@@ -719,7 +720,7 @@ describe('Method \'one\'', function () {
         runs(function () {
             expect(result).toBeUndefined();
             expect(error instanceof pgp.errors.QueryResultError).toBe(true);
-            expect(error.message).toBe($errors.multiple);
+            expect(error.message).toBe($errors.multiRow);
         });
     });
 });
@@ -799,7 +800,7 @@ describe('Method \'oneOrNone\'', function () {
         runs(function () {
             expect(result).toBeUndefined();
             expect(error instanceof pgp.errors.QueryResultError).toBe(true);
-            expect(error.message).toBe($errors.multiple);
+            expect(error.message).toBe($errors.multiRow);
         });
     });
 
@@ -1295,7 +1296,7 @@ describe('Return data from a query must match the request type', function () {
         runs(function () {
             expect(result).toBeNull();
             expect(error instanceof pgp.errors.QueryResultError).toBe(true);
-            expect(error.message).toBe($errors.multiple);
+            expect(error.message).toBe($errors.multiRow);
         });
     });
 
@@ -1319,7 +1320,7 @@ describe('Return data from a query must match the request type', function () {
 
     it('method \'any\' must return an empty array when no records found', function () {
         let result, error;
-        db.any('select * from person where name=\'Unknown\'')
+        db.manyOrNone('select * from person where name=\'Unknown\'')
             .then(function (data) {
                 result = data;
             }, function (reason) {
@@ -1339,27 +1340,9 @@ describe('Return data from a query must match the request type', function () {
 });
 
 describe('Queries must not allow invalid QRM (Query Request Mask) combinations', function () {
-    it('method \'query\' must throw an error when mask is one+many', function () {
+    it('method \'query\' must throw an error when QRM is > 15', function () {
         let result, error;
-        db.query('select * from person', undefined, pgp.queryResult.one | pgp.queryResult.many)
-            .then(function (data) {
-                result = data;
-            }, function (reason) {
-                result = null;
-                error = reason;
-            });
-        waitsFor(function () {
-            return result !== undefined;
-        }, 'Query timed out', 5000);
-        runs(function () {
-            expect(result).toBeNull();
-            expect(error instanceof TypeError).toBe(true);
-            expect(error.message).toBe('Invalid Query Result Mask specified.');
-        });
-    });
-    it('method \'query\' must throw an error when QRM is > 6', function () {
-        let result, error;
-        db.query('select * from person', undefined, 7)
+        db.query('select * from person', undefined, 16)
             .then(function (data) {
                 result = data;
             }, function (reason) {

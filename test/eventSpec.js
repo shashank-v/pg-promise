@@ -342,7 +342,7 @@ describe('Error event', function () {
         });
         it('must reject with correct error', function () {
             expect(errTxt instanceof pgp.errors.QueryResultError).toBe(true);
-            expect(errTxt.message).toBe('No return data was expected.');
+            expect(errTxt.message).toBe('Multiple rows were not expected.');
             expect(context.query).toBe('select * from users');
             expect(context.params).toBeUndefined();
             if (!options.pgNative) {

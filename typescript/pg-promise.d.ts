@@ -1,5 +1,5 @@
 ////////////////////////////////////////
-// Requires pg-promise v6.3.3 or later.
+// Requires pg-promise v7.0.0 or later.
 ////////////////////////////////////////
 
 import * as XPromise from './ext-promise'; // External Promise Provider
@@ -228,8 +228,8 @@ declare namespace pgPromise {
         one = 1,
         many = 2,
         none = 4,
-        any = 6,
-        multi = 8
+        multi = 8,
+        any = 15
     }
 
     // PreparedStatement class;

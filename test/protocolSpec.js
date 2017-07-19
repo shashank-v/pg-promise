@@ -70,7 +70,8 @@ describe('Library instance', function () {
         expect(pgpLib.queryResult.one).toBe(1);
         expect(pgpLib.queryResult.many).toBe(2);
         expect(pgpLib.queryResult.none).toBe(4);
-        expect(pgpLib.queryResult.any).toBe(6);
+        expect(pgpLib.queryResult.multi).toBe(8);
+        expect(pgpLib.queryResult.any).toBe(15);
     });
 
 });
