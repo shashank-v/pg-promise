@@ -180,7 +180,7 @@ declare namespace pgPromise {
         readonly skip: (name: string) => boolean;
 
         // API: http://vitaly-t.github.io/pg-promise/helpers.Column.html#toString
-        toString(): string
+        toString(level?: number): string
     }
 
     // helpers.Column class;
@@ -217,7 +217,7 @@ declare namespace pgPromise {
         prepare(obj: Object): Object
 
         // API: http://vitaly-t.github.io/pg-promise/helpers.ColumnSet.html#toString
-        toString(): string
+        toString(level?: number): string
     }
 
     const minify: typeof pgMinify;
@@ -228,7 +228,8 @@ declare namespace pgPromise {
         one = 1,
         many = 2,
         none = 4,
-        any = 6
+        any = 6,
+        multi = 8
     }
 
     // PreparedStatement class;
@@ -254,7 +255,7 @@ declare namespace pgPromise {
         parse(): TPreparedBasic | errors.PreparedStatementError
 
         // API: http://vitaly-t.github.io/pg-promise/PreparedStatement.html#toString
-        toString(): string
+        toString(level?: number): string
     }
 
     // ParameterizedQuery class;
@@ -278,7 +279,7 @@ declare namespace pgPromise {
         parse(): TParameterizedBasic | errors.ParameterizedQueryError
 
         // API: http://vitaly-t.github.io/pg-promise/ParameterizedQuery.html#toString
-        toString(): string
+        toString(level?: number): string
     }
 
     // QueryFile class;
@@ -301,7 +302,7 @@ declare namespace pgPromise {
         prepare(): void
 
         // API: http://vitaly-t.github.io/pg-promise/QueryFile.html#toString
-        toString(): string
+        toString(level?: number): string
     }
 
     // PromiseAdapter class;
@@ -486,14 +487,14 @@ declare namespace pgPromise {
             stack: string;
 
             // extended properties:
-            result: pg.IResult;
-            received: number;
+            result: pg.IResult | pg.IResult[];
+            received?: number;
             code: queryResultErrorCode;
             query: string;
             values: any;
 
             // API: http://vitaly-t.github.io/pg-promise/errors.QueryResultError.html#toString
-            toString(): string
+            toString(level?: number): string
         }
 
         // QueryFileError interface;
@@ -511,7 +512,7 @@ declare namespace pgPromise {
             error: pgMinify.SQLParsingError;
 
             // API: http://vitaly-t.github.io/pg-promise/errors.QueryFileError.html#toString
-            toString(): string
+            toString(level?: number): string
         }
 
         // PreparedStatementError interface;
@@ -527,7 +528,7 @@ declare namespace pgPromise {
             error: QueryFileError;
 
             // API: http://vitaly-t.github.io/pg-promise/errors.PreparedStatementError.html#toString
-            toString(): string
+            toString(level?: number): string
         }
 
         // ParameterizedQueryError interface;
@@ -543,7 +544,7 @@ declare namespace pgPromise {
             error: QueryFileError;
 
             // API: http://vitaly-t.github.io/pg-promise/errors.ParameterizedQueryError.html#toString
-            toString(): string
+            toString(level?: number): string
         }
 
         // Query Result Error Code;
@@ -551,7 +552,8 @@ declare namespace pgPromise {
         enum queryResultErrorCode {
             noData = 0,
             notEmpty = 1,
-            multiple = 2
+            multiRow = 2,
+            multiResult = 3
         }
     }
 

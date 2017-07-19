@@ -10,4 +10,5 @@ const err3 = <pgPromise.errors.PreparedStatementError>null;
 const file = err3.error.file;
 
 const qrec = pgPromise.errors.queryResultErrorCode;
-const t = qrec.multiple;
+const t1: number = qrec.multiRow;
+const t2: number = qrec.multiResult;

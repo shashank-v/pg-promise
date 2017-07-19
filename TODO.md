@@ -1,6 +1,7 @@
 # to be done for v7.0 of the driver
 
-* Mask `multi` to be added;
+* Mask `multi` to be added; DONE!
+* Add the new error type; DONE!
 * Add support for `one` | `many`, as per the method `oneOrMany` below
 * Add method `oneOrMany`, to resolve with 1 object when 1 row is returned, and with an array when multiple rows are returned.
 * Fully refactor the `query` implementation - make it simpler, and well-split
