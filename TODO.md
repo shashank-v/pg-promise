@@ -83,3 +83,6 @@ DECIDED: mask and method `any` both represent the result according to the mask:
 
 This requires addition of method `rows`. Possible alternative names: `all`, `data`, `list`, `enum`, `array`.
 
+PROBLEM: methods `query` + `func` become 100% incompatible with all the code out there today.
+
+TODO: I must remove `duration` from everywhere, except the `Result`.

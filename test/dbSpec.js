@@ -496,9 +496,6 @@ describe('Method \'map\'', function () {
             expect(pArr).toEqual([{value: 1}]);
             expect(pData).toEqual([{newVal: 2}]);
         });
-        it('must provide \'duration\'', function () {
-            expect(typeof pData.duration).toBe('number');
-        });
     });
 
     describe('negative:', function () {
