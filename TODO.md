@@ -85,4 +85,9 @@ This requires addition of method `rows`. Possible alternative names: `all`, `dat
 
 PROBLEM: methods `query` + `func` become 100% incompatible with all the code out there today.
 
-TODO: I must remove `duration` from everywhere, except the `Result`.
+TODO:
+
+* I must remove `duration` from everywhere, except the `Result`.
+* Document method `toPostgres` in QueryFile, add it to typescripts too
+
+
