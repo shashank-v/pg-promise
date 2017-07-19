@@ -32,7 +32,7 @@
 # remaining problems
 
 Method `any` ambiguity. Should it support multi-results? The feeling is that it should!
-So it is no longer the same as method `manyOrNone`.
+So it is no longer the same as method `manyOrNone`. SOLVED!
 
 DECIDED: mask and method `any` both represent the result according to the mask:
 
@@ -45,4 +45,41 @@ DECIDED: mask and method `any` both represent the result according to the mask:
 
 * methods map/each now use `manyOrNone` instead of `any`
 * event `receive` is called multiple times
- 
+
+| mask/rows             | 0            | 1            |   > 1        | multi-result       |
+|:---------------------:|:------------:|:------------:|:------------:|:------------------:|
+|   `none`	            | `null`       | _error_      | _error_      | _error_            |
+|   `one`	            | _error_      | `{}`         | _error_      | _error_            |
+|   `many`	            | _error_      | `[{}]`       | `[{}...]`    | _error_            |
+|   `multi`             | `[[{}..]..]` | `[[{}..]..]` | `[[{}..]..]` | `[[{}..]..]`       |
+|   `any`               | `null`       | `{}`         | `[{}...]`    | `[[{}..]..]`       |
+| `none`&`one`          | `null`       | `{}`         | _error_      | _error_            |
+| `none`&`many`         | `null`       | `[{}]`       | `[{}...]`    | _error_            |
+| `none`&`multi`        | `null`       | `[[{}]]`     | `[[{}...]]`  | `[[{}..]..]`       |
+| `none`&`one`&`many`   | `null`       | `{}`         | `[{}...]`    | _error_            |
+| `none`&`one`&`multi`  | `null`       | `{}`         | _error_      | `[[{}..]..]`       |
+| `none`&`many`&`multi` | `null`       | `[{}]`       | `[{}...]`    | `[[{}..]..]`       |
+| `one`&`many`          | _error_      | `{}`         | `[{}...]`    | _error_            |
+| `one`&`multi`         | `[[]]`       | `{}`         | `[[{}...]]`  | `[[{}..]..]`       |
+| `one`&`many`&`multi`  | `[[]]`       | `{}`         | `[{}...]`    | `[[{}..]..]`       |
+| `many`&`multi`        | `[[]]`       | `[{}]`       | `[{}...]`    | `[[{}..]..]`       |
+
+
+| method/rows   | 0                  | 1                  | > 1                | multi-result       |
+|:-------------:|:------------------:|:------------------:|:------------------:|:------------------:|
+| `none`	    | `null`             | _error_            | _error_            | _error_            |
+| `one`	        | _error_            | `{}`               | _error_            | _error_            |
+| `oneOrNone`   | `null`             | `{}`               | _error_            | _error_            |
+| `many`        | _error_            | `[{}]`             | `[{}...]`          | _error_            |
+| `manyOrNone`  | `null`             | `[{}]`             | `[{}...]`          | _error_            |
+| `any`         | `null`             | `{}`               | `[{}...]`          | `[[{}..]..]`       |
+| `rows`        | `[]`               | `[{}]`             | `[{}...]`          | _error_            |
+| `map`         | `[]`               | `[{}]`             | `[{}...]`          | _error_            |
+| `each`        | `[]`               | `[{}]`             | `[{}...]`          | _error_            |
+| `result`      | `Result{}`         | `Result{}`         | `Result{}`         | _error_            |
+| `proc`        | `null`             | `{}`               | _error_            | _error_            |
+| `multi`       | `[[{}..]..]`       | `[[{}..]..]`       | `[[{}..]..]`       | `[[{}..]..]`       |
+| `multiResult` | `[[Result{}..]..]` | `[[Result{}..]..]` | `[[Result{}..]..]` | `[[Result{}..]..]` |
+
+This requires addition of method `rows`. Possible alternative names: `all`, `data`, `list`, `enum`, `array`.
+
