@@ -2,23 +2,23 @@
 
 * Mask `multi` to be added; DONE!
 * Add the new error type; DONE!
-* Fully refactor the `query` implementation - make it simpler, and well-split
-* Add support for `one` | `many`, but no method `oneOrMany`, as it is NOT needed.
-* Add method `multi`, to always resolve with multi-array, supporting single-result-sets
-* Add method `multiResult`, to resolve with `[Result,...]` always. 
+* Fully refactor the `query` implementation - make it simpler, and well-split. DONE!
+* Add support for `one` | `many`, but no method `oneOrMany`, as it is NOT needed. DONE!
+* Add method `multi`, to always resolve with multi-array, supporting single-result-sets. DONE!
+* Add method `multiResult`, to resolve with `[Result,...]` always. DONE!
 
 ---
 
 # Possible additions, going for pg-promise v7
 
-* Refactor the Custom Types: start using method `toPostgres` and property `_rawType`.
+* Refactor the Custom Types: start using method `toPostgres` and property `_rawType`. DONE!
 * Possible: some initialization options / use of config?
 * Change how `receive` works?
 
 # other issues
 
-* Event `receive` for multi-results would need to loop through
-* Method `multi` would have to iterate through all;
+* Event `receive` for multi-results would need to loop through. DONE!
+* Method `multi` would have to iterate through all. DONE!
  
 # explanations
 
@@ -43,7 +43,7 @@ DECIDED: mask and method `any` both represent the result according to the mask:
 
 # notable changes
 
-* methods map/each now use `manyOrNone` instead of `any`
+* methods map/each now use `rows` instead of `any`
 * event `receive` is called multiple times
 
 | mask/rows             | 0            | 1            |   > 1        | multi-result       |
@@ -89,5 +89,4 @@ TODO:
 
 * I must remove `duration` from everywhere, except the `Result`.
 * Document method `toPostgres` in QueryFile, add it to typescripts too
-
 

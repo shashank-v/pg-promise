@@ -50,7 +50,7 @@ declare namespace pgPromise {
     type TPreparedBasic = {
         name: string
         text: string
-        values: Array<any>
+        values: any[]
         binary: boolean
         rowMode: string
         rows: number
@@ -58,7 +58,7 @@ declare namespace pgPromise {
 
     type TParameterizedBasic = {
         text: string
-        values: Array<any>
+        values: any[]
         binary: boolean
         rowMode: string
     };
@@ -66,7 +66,7 @@ declare namespace pgPromise {
     type TPrepared = {
         name: string
         text: string | QueryFile
-        values?: Array<any>
+        values?: any[]
         binary?: boolean
         rowMode?: string
         rows?: number
@@ -74,7 +74,7 @@ declare namespace pgPromise {
 
     type TParameterized = {
         text: string | QueryFile
-        values?: Array<any>
+        values?: any[]
         binary?: boolean
         rowMode?: string
     };
@@ -189,7 +189,7 @@ declare namespace pgPromise {
         // these are all read-only:
 
         // API: http://vitaly-t.github.io/pg-promise/helpers.ColumnSet.html#columns
-        readonly columns: Array<Column>;
+        readonly columns: Column[];
 
         // API: http://vitaly-t.github.io/pg-promise/helpers.ColumnSet.html#names
         readonly names: string;
@@ -233,14 +233,14 @@ declare namespace pgPromise {
     class PreparedStatement {
 
         // API: http://vitaly-t.github.io/pg-promise/PreparedStatement.html
-        constructor(name: string, text: string | QueryFile, values?: Array<any>)
+        constructor(name: string, text: string | QueryFile, values?: any[])
         constructor(obj: PreparedStatement)
         constructor(obj: TPrepared)
 
         // standard properties:
         name: string;
         text: string | QueryFile;
-        values: Array<any>;
+        values: any[];
 
         // advanced properties:
         binary: boolean;
@@ -259,13 +259,13 @@ declare namespace pgPromise {
     class ParameterizedQuery {
 
         // API: http://vitaly-t.github.io/pg-promise/ParameterizedQuery.html
-        constructor(text: string | QueryFile, values?: Array<any>)
+        constructor(text: string | QueryFile, values?: any[])
         constructor(obj: ParameterizedQuery)
         constructor(obj: TParameterized)
 
         // standard properties:
         text: string | QueryFile;
-        values: Array<any>;
+        values: any[];
 
         // advanced properties:
         binary: boolean;
@@ -376,10 +376,11 @@ declare namespace pgPromise {
         // API: http://vitaly-t.github.io/pg-promise/Database.html#query
         query(query: TQuery, values?: any, qrm?: queryResult): XPromise<any>
 
+        ////////////////////////////
         // result-specific methods;
 
         // API: http://vitaly-t.github.io/pg-promise/Database.html#none
-        none(query: TQuery, values?: any): XPromise<void>
+        none(query: TQuery, values?: any): XPromise<null>
 
         // API: http://vitaly-t.github.io/pg-promise/Database.html#one
         one(query: TQuery, values?: any, cb?: (value: any) => any, thisArg?: any): XPromise<any>
@@ -391,7 +392,7 @@ declare namespace pgPromise {
         many(query: TQuery, values?: any): XPromise<any[]>
 
         // API: http://vitaly-t.github.io/pg-promise/Database.html#manyOrNone
-        manyOrNone(query: TQuery, values?: any): XPromise<void | any[]>
+        manyOrNone(query: TQuery, values?: any): XPromise<null | any[]>
 
         // API: http://vitaly-t.github.io/pg-promise/Database.html#any
         any(query: TQuery, values?: any): XPromise<any>
@@ -405,7 +406,7 @@ declare namespace pgPromise {
         // API: http://vitaly-t.github.io/pg-promise/Database.html#multi
         multi(query: TQuery, values?: any): XPromise<any[][]>
 
-        // API: http://vitaly-t.github.io/pg-promise/Database.html#multi
+        // API: http://vitaly-t.github.io/pg-promise/Database.html#multiResult
         multiResult(query: TQuery, values?: any): XPromise<pg.IResult[]>
 
         // API: http://vitaly-t.github.io/pg-promise/Database.html#stream
@@ -418,10 +419,10 @@ declare namespace pgPromise {
         proc(procName: string, values?: any, cb?: (value: any) => any, thisArg?: any): XPromise<any>
 
         // API: http://vitaly-t.github.io/pg-promise/Database.html#map
-        map(query: TQuery, values: any, cb: (row: any, index: number, data: Array<any>) => any, thisArg?: any): XPromise<any[]>
+        map(query: TQuery, values: any, cb: (row: any, index: number, data: any[]) => any, thisArg?: any): XPromise<any[]>
 
         // API: http://vitaly-t.github.io/pg-promise/Database.html#each
-        each(query: TQuery, values: any, cb: (row: any, index: number, data: Array<any>) => void, thisArg?: any): XPromise<any[]>
+        each(query: TQuery, values: any, cb: (row: any, index: number, data: any[]) => void, thisArg?: any): XPromise<any[]>
 
         // Tasks
         // API: http://vitaly-t.github.io/pg-promise/Database.html#task
@@ -588,7 +589,7 @@ declare namespace pgPromise {
         connect?: (client: pg.Client, dc: any, fresh: boolean) => void
         disconnect?: (client: pg.Client, dc: any) => void
         query?: (e: IEventContext) => void
-        receive?: (data: Array<any>, result: pg.IResult, e: IEventContext) => void
+        receive?: (data: any[], result: pg.IResult, e: IEventContext) => void
         task?: (e: IEventContext) => void
         transact?: (e: IEventContext) => void
         error?: (err: any, e: IEventContext) => void
@@ -621,7 +622,7 @@ declare namespace pgPromise {
         alias(name: string | (() => string)): string
 
         // API: http://vitaly-t.github.io/pg-promise/formatting.html#.array
-        array(arr: Array<any> | (() => Array<any>)): string
+        array(arr: any[] | (() => any[])): string
 
         // API: http://vitaly-t.github.io/pg-promise/formatting.html#.bool
         bool(value: any | (() => any)): string
@@ -684,11 +685,11 @@ declare namespace pgPromise {
 
         concat(queries: Array<string | TQueryFormat | QueryFile>): string
 
-        insert(data: Object | Array<Object>, columns?: TQueryColumns, table?: string | TTable | TableName): string
+        insert(data: Object | Object[], columns?: TQueryColumns, table?: string | TTable | TableName): string
 
-        update(data: Object | Array<Object>, columns?: TQueryColumns, table?: string | TTable | TableName, options?: TUpdateOptions): any
+        update(data: Object | Object[], columns?: TQueryColumns, table?: string | TTable | TableName, options?: TUpdateOptions): any
 
-        values(data: Object | Array<Object>, columns?: TQueryColumns): string
+        values(data: Object | Object[], columns?: TQueryColumns): string
 
         sets(data: Object, columns?: TQueryColumns): string
 
