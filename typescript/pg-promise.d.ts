@@ -605,7 +605,7 @@ declare namespace pgPromise {
     // Custom-Type Formatting object
     // API: https://github.com/vitaly-t/pg-promise#custom-type-formatting
     interface CTFObject {
-        formatDBType: (a: any) => any
+        toPostgres: (a: any) => any
     }
 
     // Query formatting namespace;
