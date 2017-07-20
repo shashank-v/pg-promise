@@ -87,6 +87,7 @@ PROBLEM: methods `query` + `func` become 100% incompatible with all the code out
 
 TODO:
 
-* I must remove `duration` from everywhere, except the `Result`.
-* Document method `toPostgres` in QueryFile, add it to typescripts too
+* I must remove `duration` from everywhere, except the `Result`. DONE!
+* Document method `toPostgres` in QueryFile, add it to typescripts too. DONE!
+
 

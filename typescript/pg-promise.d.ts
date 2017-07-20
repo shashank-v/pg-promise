@@ -299,6 +299,9 @@ declare namespace pgPromise {
 
         // API: http://vitaly-t.github.io/pg-promise/QueryFile.html#toString
         toString(level?: number): string
+
+        // API: http://vitaly-t.github.io/pg-promise/QueryFile.html#toPostgres
+        toPostgres(self: QueryFile): string
     }
 
     // PromiseAdapter class;
