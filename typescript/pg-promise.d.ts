@@ -157,6 +157,9 @@ declare namespace pgPromise {
 
         // API: http://vitaly-t.github.io/pg-promise/helpers.TableName.html#toString
         toString(): string
+
+        // API: http://vitaly-t.github.io/pg-promise/helpers.TableName.html#toPostgres
+        toPostgres(self: TableName): string
     }
 
     // helpers.Column class;
