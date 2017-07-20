@@ -32,7 +32,7 @@ declare namespace pg {
         rows: any[]
         fields: IColumn[]
 
-        duration: number // pg-promise extension
+        duration?: number // pg-promise extension; not set for multi-results
 
         // properties below are not available within Native Bindings:
 
