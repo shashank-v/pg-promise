@@ -90,4 +90,8 @@ TODO:
 * I must remove `duration` from everywhere, except the `Result`. DONE!
 * Document method `toPostgres` in QueryFile, add it to typescripts too. DONE!
 
+# alternative?
 
+PROBLEM: I don't have a method that would return exactly what I'm getting back, without any transformation.
+
+* Have mask `any` equal 16, and represent `whatever we get`?
