@@ -12,11 +12,20 @@ db.query('', [], qrm.one | qrm.none)
         const d2 = data[0].value;
     });
 
+db.any<number>('').then(data => {
+    const a: number = data[0];
+});
+
+db.any('').then(data => {
+    const a: number = data[0];
+});
+
 db.none('')
     .then(data => {
     });
 
 db.one('', [], value => {
+    return {value: 123};
 }, 'this')
     .then(data => {
         const value = data.value;
@@ -32,25 +41,18 @@ db.many('')
         const value = data[0].ops;
     });
 
-db.result('', [], () => {
+db.result('', [], r => {
+    return r;
 }, 123)
     .then(data => {
         const value = data.rows[0].name;
         const d: number = data.duration;
     });
 
-db.map('', null, row => {
-    return row.value;
-})
-    .then((data: any[]) => {
-        const l: number = data.length;
-    });
-
-db.each('', null, row => {
-    const v = row.value;
-})
-    .then((data: any[]) => {
-        const l: number = data.length;
+db.result('')
+    .then(data => {
+        const value = data.rows[0].name;
+        const d: number = data.duration;
     });
 
 db.task(t => {
@@ -58,7 +60,6 @@ db.task(t => {
         t.one('')
     ])
         .then((data: any[]) => {
-            const l: number = data.length;
             return data;
         });
 })
