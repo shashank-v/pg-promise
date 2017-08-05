@@ -64,6 +64,7 @@ DECIDED: mask and method `any` both represent the result according to the mask:
 | `one`&`many`&`multi`  | `[[]]`       | `{}`         | `[{}...]`    | `[[{}..]..]`       |
 | `many`&`multi`        | `[[]]`       | `[{}]`       | `[{}...]`    | `[[{}..]..]`       |
 
+## mask methods
 
 | method/rows   | 0                  | 1                  | > 1                | multi-result       |
 |:-------------:|:------------------:|:------------------:|:------------------:|:------------------:|
@@ -71,15 +72,19 @@ DECIDED: mask and method `any` both represent the result according to the mask:
 | `one`	        | _error_            | `{}`               | _error_            | _error_            |
 | `oneOrNone`   | `null`             | `{}`               | _error_            | _error_            |
 | `many`        | _error_            | `[{}]`             | `[{}...]`          | _error_            |
-| `manyOrNone`  | `null`             | `[{}]`             | `[{}...]`          | _error_            |
-| `any`         | `null`             | `{}`               | `[{}...]`          | `[[{}..]..]`       |
+| `multi`       | `[[{}..]..]`       | `[[{}..]..]`       | `[[{}..]..]`       | `[[{}..]..]`       |
+
+## special methods
+
+| method/rows   | 0                  | 1                  | > 1                | multi-result       |
+|:-------------:|:------------------:|:------------------:|:------------------:|:------------------:|
 | `rows`        | `[]`               | `[{}]`             | `[{}...]`          | _error_            |
 | `map`         | `[]`               | `[{}]`             | `[{}...]`          | _error_            |
 | `each`        | `[]`               | `[{}]`             | `[{}...]`          | _error_            |
-| `result`      | `Result{}`         | `Result{}`         | `Result{}`         | _error_            |
 | `proc`        | `null`             | `{}`               | _error_            | _error_            |
-| `multi`       | `[[{}..]..]`       | `[[{}..]..]`       | `[[{}..]..]`       | `[[{}..]..]`       |
+| `result`      | `Result{}`         | `Result{}`         | `Result{}`         | _error_            |
 | `multiResult` | `[[Result{}..]..]` | `[[Result{}..]..]` | `[[Result{}..]..]` | `[[Result{}..]..]` |
+
 
 This requires addition of method `rows`. Possible alternative names: `all`, `data`, `list`, `enum`, `array`.
 
@@ -92,6 +97,16 @@ TODO:
 
 # alternative?
 
+## Take 1
+
 PROBLEM: I don't have a method that would return exactly what I'm getting back, without any transformation.
 
 * Have mask `any` equal 16, and represent `whatever we get`?
+
+## Take 2
+
+After all the dislike of the new overkill...
+
+* Have `any` resolve with [][] for multi-rows
+* Use the new `multi` mask, and set `any` to include it.
+* 
