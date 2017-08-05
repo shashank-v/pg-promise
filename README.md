@@ -3,8 +3,8 @@ pg-promise
 
 [Promises/A+] interface for PostgreSQL.
 
-[![Build Status](https://travis-ci.org/vitaly-t/pg-promise.svg?branch=v7)](https://travis-ci.org/vitaly-t/pg-promise)
-[![Coverage Status](https://coveralls.io/repos/vitaly-t/pg-promise/badge.svg?branch=v7)](https://coveralls.io/r/vitaly-t/pg-promise?branch=v7)
+[![Build Status](https://travis-ci.org/vitaly-t/pg-promise.svg?branch=v7min)](https://travis-ci.org/vitaly-t/pg-promise)
+[![Coverage Status](https://coveralls.io/repos/vitaly-t/pg-promise/badge.svg?branch=v7min)](https://coveralls.io/r/vitaly-t/pg-promise?branch=v7min)
 [![Package Quality](http://npm.packagequality.com/shield/pg-promise.svg)](http://packagequality.com/#?package=pg-promise)
 [![Join the chat at https://gitter.im/vitaly-t/pg-promise](https://img.shields.io/gitter/room/vitaly-t/pg-promise.svg)](https://gitter.im/vitaly-t/pg-promise?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
